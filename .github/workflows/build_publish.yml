@@ -37,10 +37,10 @@ jobs:
       - name: install helm chart
         uses: WyriHaximus/github-action-helm3@v2
         with:
-          exec: helm upgrade --install --atomic --version 2021.12.20 minio bitnami/minio --set "global.storageClass=longhorn,auth.rootPassword=${{ secrets.MINIO_ROOT_PASSWORD }}"
+          exec: helm upgrade --install --atomic --namespace minio --version 9.2.5 minio bitnami/minio --set "global.storageClass=longhorn,auth.rootPassword=${{ secrets.MINIO_ROOT_PASSWORD }}"
           kubeconfig: ${{ secrets.KUBECONFIG_RAW }}
       - name: install ingress
         uses: WyriHaximus/github-action-helm3@v2
         with:
-          exec: helm upgrade --install --atomic minio-ingress .
+          exec: helm upgrade --install --atomic --namespace minio minio-ingress .
           kubeconfig: ${{ secrets.KUBECONFIG_RAW }}
